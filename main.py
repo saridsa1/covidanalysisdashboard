@@ -6,11 +6,16 @@ import pandas as pd
 import plotly.graph_objects as go
 from urllib.request import urlopen
 import json
+import pathlib
 
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
 
-pickled_data_source = "C:\AzureProjects\COVID19\data\pickled_data_source"
+# get relative data folder
+PATH = pathlib.Path(__file__).parent
+DATA_PATH = PATH.joinpath("data").resolve()
+
+pickled_data_source = DATA_PATH.joinpath("pickled_data_source")
 
 df = pd.read_pickle(pickled_data_source)
 
